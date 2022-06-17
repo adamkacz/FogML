@@ -15,6 +15,7 @@
 """
 
 import sklearn.ensemble
+import lightgbm as lgbm
 
 from sklearn import *
 from sklearn.neural_network import *
@@ -26,6 +27,7 @@ from .qlearning_code_generator import QLearningCodeGenerator
 from .qstatesintervals_code_generator import QStatesIntervalsCodeGenerator
 from .random_forest_generator import RandomForestCodeGenerator
 from .tree_code_generator import TreeCodeGenerator
+from .lgbm_random_forest_code_generator import LGBMRandomForestCodeGenerator
 
 
 class GeneratorFactory:
@@ -36,7 +38,9 @@ class GeneratorFactory:
         sklearn.neural_network.MLPClassifier: MlpCodeGenerator,
         sklearn.ensemble.RandomForestClassifier: RandomForestCodeGenerator,
         fogml.rl.QLearning: QLearningCodeGenerator,
-        fogml.rl.QStatesIntervals: QStatesIntervalsCodeGenerator
+        fogml.rl.QStatesIntervals: QStatesIntervalsCodeGenerator,
+        lgbm.LGBMClassifier: LGBMRandomForestCodeGenerator,
+        lgbm.Booster: LGBMRandomForestCodeGenerator
     }
 
     def get_generator(self, clf):
