@@ -19,6 +19,7 @@ import lightgbm as lgbm
 
 from sklearn import *
 from sklearn.neural_network import *
+import xgboost as xgb
 
 import fogml.rl
 from .bayes_code_generator import BayesCodeGenerator
@@ -28,10 +29,9 @@ from .qstatesintervals_code_generator import QStatesIntervalsCodeGenerator
 from .random_forest_generator import RandomForestCodeGenerator
 from .tree_code_generator import TreeCodeGenerator
 from .lgbm_random_forest_code_generator import LGBMRandomForestCodeGenerator
-
+from .xgboost_random_forest_code_generator import XGBoostRandomForestGenerator
 
 class GeneratorFactory:
-
     recognized_classifiers = {
         sklearn.tree.DecisionTreeClassifier: TreeCodeGenerator,
         sklearn.naive_bayes.GaussianNB: BayesCodeGenerator,
@@ -40,7 +40,8 @@ class GeneratorFactory:
         fogml.rl.QLearning: QLearningCodeGenerator,
         fogml.rl.QStatesIntervals: QStatesIntervalsCodeGenerator,
         lgbm.LGBMClassifier: LGBMRandomForestCodeGenerator,
-        lgbm.Booster: LGBMRandomForestCodeGenerator
+        lgbm.Booster: LGBMRandomForestCodeGenerator,
+        xgb.XGBClassifier: XGBoostRandomForestGenerator,
     }
 
     def get_generator(self, clf):

@@ -18,6 +18,8 @@ import pickle
 
 from sklearn import datasets, tree, naive_bayes
 from sklearn.neural_network import MLPClassifier
+from lightgbm import LGBMClassifier
+from xgboost import XGBClassifier
 
 from fogml.generators import GeneratorFactory
 
@@ -29,8 +31,11 @@ y = iris.target
 
 #clf = tree.DecisionTreeClassifier(random_state=3456)
 #clf = naive_bayes.GaussianNB()
-clf = MLPClassifier(hidden_layer_sizes=(4,), random_state=34, solver='adam', max_iter=1500)
+#clf = MLPClassifier(hidden_layer_sizes=(4,), random_state=34, solver='adam', max_iter=1500)
 #clf = RandomForestClassifier(n_estimators=10)
+#clf = XGBClassifier(max_depth=3, n_estimators=3,use_label_encoder=False)
+clf = LGBMClassifier(max_depth=3, n_estimators=3)
+
 
 generator = factory.get_generator(clf)
 
